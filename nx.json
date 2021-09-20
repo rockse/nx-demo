@@ -54,6 +54,13 @@
       "tags": [],
       "implicitDependencies": ["checkout"]
     },
+    "footer": {
+      "tags": []
+    },
+    "footer-e2e": {
+      "tags": [],
+      "implicitDependencies": ["footer"]
+    },
     "header": {
       "tags": []
     },

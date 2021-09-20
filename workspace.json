@@ -235,6 +235,85 @@
         }
       }
     },
+    "footer": {
+      "root": "libs/footer",
+      "sourceRoot": "libs/footer/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/footer/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/footer"],
+          "options": {
+            "jestConfig": "libs/footer/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "storybook": {
+          "executor": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/react",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/footer/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "executor": "@nrwl/storybook:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "uiFramework": "@storybook/react",
+            "outputPath": "dist/storybook/footer",
+            "config": {
+              "configFolder": "libs/footer/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        }
+      }
+    },
+    "footer-e2e": {
+      "root": "apps/footer-e2e",
+      "sourceRoot": "apps/footer-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/footer-e2e/cypress.json",
+            "devServerTarget": "footer:storybook"
+          },
+          "configurations": {
+            "ci": {
+              "devServerTarget": "footer:storybook:ci"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/footer-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
     "header": {
       "root": "libs/header",
       "sourceRoot": "libs/header/src",
