@@ -27,6 +27,26 @@
     ]
   },
   "projects": {
+    "account": {
+      "tags": []
+    },
+    "account-e2e": {
+      "tags": [],
+      "implicitDependencies": ["account"]
+    },
+    "brands": {
+      "tags": []
+    },
+    "checkout": {
+      "tags": []
+    },
+    "checkout-e2e": {
+      "tags": [],
+      "implicitDependencies": ["checkout"]
+    },
+    "header": {
+      "tags": []
+    },
     "shopping": {
       "tags": []
     },

@@ -9,9 +9,9 @@
   },
   "private": true,
   "dependencies": {
-    "@nrwl/next": "12.9.0",
     "core-js": "^3.6.5",
     "next": "11.1.0",
+    "next-pwa": "^5.3.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-is": "17.0.2",
@@ -20,12 +20,14 @@
     "tslib": "^2.0.0"
   },
   "devDependencies": {
+    "@nrwl/next": "12.9.0",
+    "@nrwl/storybook": "^12.9.0",
     "@nrwl/cli": "12.9.0",
     "@nrwl/cypress": "12.9.0",
     "@nrwl/eslint-plugin-nx": "12.9.0",
     "@nrwl/jest": "12.9.0",
     "@nrwl/linter": "12.9.0",
-    "@nrwl/react": "12.9.0",
+    "@nrwl/react": "^12.9.0",
     "@nrwl/tao": "12.9.0",
     "@nrwl/web": "12.9.0",
     "@nrwl/workspace": "12.9.0",
