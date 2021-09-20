@@ -40,6 +40,13 @@
       "tags": [],
       "implicitDependencies": ["account"]
     },
+    "brands": {
+      "tags": []
+    },
+    "brands-e2e": {
+      "tags": [],
+      "implicitDependencies": ["brands"]
+    },
     "checkout": {
       "tags": []
     },
