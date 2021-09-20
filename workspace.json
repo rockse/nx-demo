@@ -79,58 +79,6 @@
         }
       }
     },
-    "brands": {
-      "root": "apps/brands",
-      "sourceRoot": "apps/brands",
-      "projectType": "application",
-      "targets": {
-        "build": {
-          "executor": "@nrwl/next:build",
-          "outputs": ["{options.outputPath}"],
-          "options": {
-            "root": "apps/brands",
-            "outputPath": "dist/apps/brands"
-          },
-          "configurations": {
-            "production": {}
-          }
-        },
-        "serve": {
-          "executor": "@nrwl/next:server",
-          "options": {
-            "buildTarget": "brands:build",
-            "dev": true
-          },
-          "configurations": {
-            "production": {
-              "buildTarget": "brands:build:production",
-              "dev": false
-            }
-          }
-        },
-        "export": {
-          "executor": "@nrwl/next:export",
-          "options": {
-            "buildTarget": "brands:build:production"
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/brands"],
-          "options": {
-            "jestConfig": "apps/brands/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
-          "options": {
-            "lintFilePatterns": ["apps/brands/**/*.{ts,tsx,js,jsx}"]
-          }
-        }
-      }
-    },
     "checkout": {
       "root": "apps/checkout",
       "sourceRoot": "apps/checkout",
@@ -227,6 +175,63 @@
           "options": {
             "jestConfig": "libs/header/jest.config.js",
             "passWithNoTests": true
+          }
+        },
+        "storybook": {
+          "executor": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/react",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/header/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "executor": "@nrwl/storybook:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "uiFramework": "@storybook/react",
+            "outputPath": "dist/storybook/header",
+            "config": {
+              "configFolder": "libs/header/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        }
+      }
+    },
+    "header-e2e": {
+      "root": "apps/header-e2e",
+      "sourceRoot": "apps/header-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/header-e2e/cypress.json",
+            "devServerTarget": "header:storybook"
+          },
+          "configurations": {
+            "ci": {
+              "devServerTarget": "header:storybook:ci"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/header-e2e/**/*.{js,ts}"]
           }
         }
       }

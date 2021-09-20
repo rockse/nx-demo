@@ -10,7 +10,7 @@ const StyledHeader = styled.div`
 export function Header(props: HeaderProps) {
   return (
     <StyledHeader>
-      <h1>Welcome to MS!</h1>
+      <h1>Welcome to Hello S!</h1>
     </StyledHeader>
   );
 }
