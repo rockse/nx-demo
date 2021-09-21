@@ -10,7 +10,7 @@ const StyledFooter = styled.div`
 export function Footer(props: FooterProps) {
   return (
     <StyledFooter>
-      <h1>Welcome to Footer!</h1>
+      <h1>Welcome to MS Footer!</h1>
     </StyledFooter>
   );
 }
