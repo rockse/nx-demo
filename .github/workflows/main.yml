@@ -23,6 +23,6 @@ jobs:
       - name: Derive appropriate SHAs for base and head for `nx affected` commands
         uses: nrwl/nx-set-shas@v2
 
-      - run: nx affected:lint --base=${{ env.NX_HEAD }}
+      - run: yarn nx affected:lint --base=${{ env.NX_HEAD }}
 
       # ...other CI steps
