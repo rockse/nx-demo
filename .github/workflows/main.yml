@@ -20,9 +20,9 @@ jobs:
       #   with:
       #     targets: lint,test,build
 
-      - name: Derive appropriate SHAs for base and head for `nx affected` commands
-        uses: nrwl/nx-set-shas@v2
+      # - name: Derive appropriate SHAs for base and head for `nx affected` commands
+      #   uses: nrwl/nx-set-shas@v2
 
-      - run: yarn nx affected:lint --base=${{ env.NX_HEAD }}
+      - run: yarn nx affected:lint
 
       # ...other CI steps
