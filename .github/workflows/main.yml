@@ -1,28 +1,42 @@
-name: CI
-on: [push]
+# name: CI
+# on: [push]
 
+# jobs:
+#   ci:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v2
+#         name: Checkout
+#         with:
+#           fetch-depth: '0'
+#       - uses: actions/setup-node@v1
+#         with:
+#           node-version: '14'
+#           registry-url: https://registry.npmjs.org/
+#       - name: Install dependencies
+#         run: yarn install --frozen-lockfile
+#       # - name: NX Lint Test and Build
+#       #   uses: mansagroup/nrwl-nx-action@main
+#       #   with:
+#       #     targets: lint,test,build
+
+#       # - name: Derive appropriate SHAs for base and head for `nx affected` commands
+#       #   uses: nrwl/nx-set-shas@v2
+
+#       - run: yarn nx affected:lint
+
+#       # ...other CI steps
+
+
+name: Nx Distributed Tasks
+on: push
 jobs:
-  lint:
+  ci:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        name: Checkout
-        with:
-          fetch-depth: '0'
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '14'
-          registry-url: https://registry.npmjs.org/
-      - name: Install dependencies
-        run: yarn install --frozen-lockfile
-      # - name: NX Lint Test and Build
-      #   uses: mansagroup/nrwl-nx-action@main
-      #   with:
-      #     targets: lint,test,build
-
-      # - name: Derive appropriate SHAs for base and head for `nx affected` commands
-      #   uses: nrwl/nx-set-shas@v2
-
-      - run: yarn nx affected:lint
-
-      # ...other CI steps
+      - run: git fetch --no-tags --prune --depth=1 origin master
+      - run: yarn install --frozen-lockfile
+      - run: yarn nx affected --target=test --base=origin/master --parallel
+      - run: yarn nx affected --target=lint --base=origin/master --parallel
+      - run: yarn nx affected --target=build --base=origin/master --prod --parallel
