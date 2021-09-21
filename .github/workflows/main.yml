@@ -1,33 +1,3 @@
-# name: CI
-# on: [push]
-
-# jobs:
-#   ci:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v2
-#         name: Checkout
-#         with:
-#           fetch-depth: '0'
-#       - uses: actions/setup-node@v1
-#         with:
-#           node-version: '14'
-#           registry-url: https://registry.npmjs.org/
-#       - name: Install dependencies
-#         run: yarn install --frozen-lockfile
-#       # - name: NX Lint Test and Build
-#       #   uses: mansagroup/nrwl-nx-action@main
-#       #   with:
-#       #     targets: lint,test,build
-
-#       # - name: Derive appropriate SHAs for base and head for `nx affected` commands
-#       #   uses: nrwl/nx-set-shas@v2
-
-#       - run: yarn nx affected:lint
-
-#       # ...other CI steps
-
-
 name: Nx Affected CI
 on:
   pull_request:
@@ -48,6 +18,15 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: git fetch origin master
       - run: yarn install
+      - name: Run Affected Lint
+        shell: bash
+        run: yarn affected:lint -- --base=remotes/origin/master
       - name: Run Affected Tests
         shell: bash
         run: yarn affected:test -- --base=remotes/origin/master
+      # - name: Run Affected e2e Tests
+      #   shell: bash
+      #   run: yarn affected:e2e -- --base=remotes/origin/master
+      - name: Run build
+        shell: bash
+        run: yarn affected:build -- --base=remotes/origin/master
