@@ -2,6 +2,8 @@ import { AppProps } from 'next/app';
 import Head from 'next/head';
 import './styles.css';
 
+import { Footer } from '@stores/footer';
+
 function CustomApp({ Component, pageProps }: AppProps) {
   return (
     <>
@@ -18,6 +20,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </main>
       </div>
+      <Footer />
     </>
   );
 }
