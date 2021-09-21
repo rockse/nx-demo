@@ -15,7 +15,14 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - name: Install dependencies
         run: yarn install --frozen-lockfile
-      - name: NX Lint Test and Build
-        uses: mansagroup/nrwl-nx-action@main
-        with:
-          targets: lint,test,build
+      # - name: NX Lint Test and Build
+      #   uses: mansagroup/nrwl-nx-action@main
+      #   with:
+      #     targets: lint,test,build
+
+      - name: Derive appropriate SHAs for base and head for `nx affected` commands
+        uses: nrwl/nx-set-shas@v2
+
+      - run: nx affected:lint --base=${{ env.NX_HEAD }}
+
+      # ...other CI steps
