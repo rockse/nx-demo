@@ -5,7 +5,17 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: mansagroup/nrwl-nx-action@v2
+      - uses: actions/checkout@v2
+        name: Checkout
+        with:
+          fetch-depth: '0'
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '14'
+          registry-url: https://registry.npmjs.org/
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: NX Lint Test and Build
+        uses: mansagroup/nrwl-nx-action@main
         with:
           targets: lint,test,build
-          affected: 'true' # Defaults to true, therefore optional
