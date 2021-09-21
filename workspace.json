@@ -157,6 +157,85 @@
         }
       }
     },
+    "card": {
+      "root": "libs/card",
+      "sourceRoot": "libs/card/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/card/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/card"],
+          "options": {
+            "jestConfig": "libs/card/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "storybook": {
+          "executor": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/react",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/card/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "executor": "@nrwl/storybook:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "uiFramework": "@storybook/react",
+            "outputPath": "dist/storybook/card",
+            "config": {
+              "configFolder": "libs/card/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        }
+      }
+    },
+    "card-e2e": {
+      "root": "apps/card-e2e",
+      "sourceRoot": "apps/card-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/card-e2e/cypress.json",
+            "devServerTarget": "card:storybook"
+          },
+          "configurations": {
+            "ci": {
+              "devServerTarget": "card:storybook:ci"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/card-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
     "checkout": {
       "root": "apps/checkout",
       "sourceRoot": "apps/checkout",
@@ -468,6 +547,84 @@
           "outputs": ["{options.outputFile}"],
           "options": {
             "lintFilePatterns": ["apps/shopping-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
+    "trial": {
+      "root": "apps/trial",
+      "sourceRoot": "apps/trial",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/next:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "root": "apps/trial",
+            "outputPath": "dist/apps/trial"
+          },
+          "configurations": {
+            "production": {}
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/next:server",
+          "options": {
+            "buildTarget": "trial:build",
+            "dev": true
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "trial:build:production",
+              "dev": false
+            }
+          }
+        },
+        "export": {
+          "executor": "@nrwl/next:export",
+          "options": {
+            "buildTarget": "trial:build:production"
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/trial"],
+          "options": {
+            "jestConfig": "apps/trial/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/trial/**/*.{ts,tsx,js,jsx}"]
+          }
+        }
+      }
+    },
+    "trial-e2e": {
+      "root": "apps/trial-e2e",
+      "sourceRoot": "apps/trial-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/trial-e2e/cypress.json",
+            "devServerTarget": "trial:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "trial:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/trial-e2e/**/*.{js,ts}"]
           }
         }
       }

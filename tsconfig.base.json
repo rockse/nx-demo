@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@stores/card": ["libs/card/src/index.ts"],
       "@stores/footer": ["libs/footer/src/index.ts"],
       "@stores/header": ["libs/header/src/index.ts"]
     }

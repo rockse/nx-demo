@@ -47,6 +47,13 @@
       "tags": [],
       "implicitDependencies": ["brands"]
     },
+    "card": {
+      "tags": []
+    },
+    "card-e2e": {
+      "tags": [],
+      "implicitDependencies": ["card"]
+    },
     "checkout": {
       "tags": []
     },
@@ -74,6 +81,13 @@
     "shopping-e2e": {
       "tags": [],
       "implicitDependencies": ["shopping"]
+    },
+    "trial": {
+      "tags": []
+    },
+    "trial-e2e": {
+      "tags": [],
+      "implicitDependencies": ["trial"]
     }
   }
 }
